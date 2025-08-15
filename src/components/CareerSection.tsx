@@ -103,9 +103,19 @@ export const CareerSection = () => {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/30"></div>
             
             {workExperience.map((company, companyIndex) => (
-              <div key={company.company} className="relative mb-12 animate-slide-in">
+              <div key={company.company} className="relative mb-16 animate-slide-in">
+                {/* Company Header */}
+                <div className="mb-8">
+                  <h4 className="font-heading text-2xl font-semibold text-primary mb-2">
+                    {company.company}
+                  </h4>
+                  <p className="font-body text-muted-foreground">
+                    {company.location}
+                  </p>
+                </div>
+                
                 {company.roles.map((role, roleIndex) => (
-                  <div key={roleIndex} className="relative flex items-start mb-8">
+                  <div key={roleIndex} className="relative flex items-start mb-8 last:mb-0">
                     {/* Timeline dot */}
                     <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-accent"></div>
                     
@@ -113,12 +123,9 @@ export const CareerSection = () => {
                     <div className="ml-20 bg-gradient-card p-6 rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 w-full">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <div>
-                          <h4 className="font-heading text-xl font-semibold text-foreground">
+                          <h5 className="font-heading text-xl font-semibold text-foreground">
                             {role.title}
-                          </h4>
-                          <p className="font-body text-primary font-medium">
-                            {company.company} — {company.location}
-                          </p>
+                          </h5>
                         </div>
                         <span className="font-body text-sm text-muted-foreground bg-secondary px-3 py-1 rounded-full">
                           {role.period}
