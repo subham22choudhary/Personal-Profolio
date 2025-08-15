@@ -98,51 +98,54 @@ export const CareerSection = () => {
             Work Experience
           </h3>
           
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/30"></div>
-            
+          <div className="space-y-16">
             {workExperience.map((company, companyIndex) => (
-              <div key={company.company} className="relative mb-16 animate-slide-in">
-                {/* Company Header */}
-                <div className="mb-8">
+              <div key={company.company} className="animate-slide-in">
+                {/* Company Section Header */}
+                <div className="bg-gradient-card p-6 rounded-lg shadow-card mb-8 border-l-4 border-primary">
                   <h4 className="font-heading text-2xl font-semibold text-primary mb-2">
                     {company.company}
                   </h4>
-                  <p className="font-body text-muted-foreground">
+                  <p className="font-body text-muted-foreground text-lg">
                     {company.location}
                   </p>
                 </div>
                 
-                {company.roles.map((role, roleIndex) => (
-                  <div key={roleIndex} className="relative flex items-start mb-8 last:mb-0">
-                    {/* Timeline dot */}
-                    <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-accent"></div>
-                    
-                    {/* Content */}
-                    <div className="ml-20 bg-gradient-card p-6 rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 w-full">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                          <h5 className="font-heading text-xl font-semibold text-foreground">
-                            {role.title}
-                          </h5>
-                        </div>
-                        <span className="font-body text-sm text-muted-foreground bg-secondary px-3 py-1 rounded-full">
-                          {role.period}
-                        </span>
-                      </div>
+                {/* Roles Timeline for this company */}
+                <div className="relative ml-4">
+                  {/* Company timeline line */}
+                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/20"></div>
+                  
+                  {company.roles.map((role, roleIndex) => (
+                    <div key={roleIndex} className="relative flex items-start mb-8 last:mb-0">
+                      {/* Timeline dot */}
+                      <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-accent z-10"></div>
                       
-                      <ul className="space-y-2">
-                        {role.achievements.map((achievement, achievementIndex) => (
-                          <li key={achievementIndex} className="font-body text-muted-foreground flex items-start">
-                            <span className="text-primary mr-2 mt-1.5 flex-shrink-0">•</span>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
+                      {/* Role Content */}
+                      <div className="ml-20 bg-background border border-border p-6 rounded-lg shadow-sm hover:shadow-card transition-all duration-300 w-full">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                          <div>
+                            <h5 className="font-heading text-xl font-semibold text-foreground mb-1">
+                              {role.title}
+                            </h5>
+                          </div>
+                          <span className="font-body text-sm text-muted-foreground bg-secondary px-3 py-1 rounded-full">
+                            {role.period}
+                          </span>
+                        </div>
+                        
+                        <ul className="space-y-2">
+                          {role.achievements.map((achievement, achievementIndex) => (
+                            <li key={achievementIndex} className="font-body text-muted-foreground flex items-start">
+                              <span className="text-primary mr-2 mt-1.5 flex-shrink-0">•</span>
+                              {achievement}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             ))}
           </div>
