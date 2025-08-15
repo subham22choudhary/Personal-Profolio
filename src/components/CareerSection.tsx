@@ -33,20 +33,6 @@ export const CareerSection = () => {
           ]
         }
       ]
-    },
-    {
-      company: "Fidelity National Financial",
-      location: "Analyst",
-      roles: [
-        {
-          title: "Analyst",
-          period: "Jun 2017 – Apr 2019",
-          achievements: [
-            "React/Redux UI with code-splitting & lazy loading (−30% load time).",
-            "WCAG-aligned UI; performance with React.memo/useCallback."
-          ]
-        }
-      ]
     }
   ];
 
