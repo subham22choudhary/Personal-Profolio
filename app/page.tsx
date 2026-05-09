@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import Link from "next/link";
 
 const experience = [
   {
@@ -67,8 +68,8 @@ const education = [
 
 function SectionLabel({ text }: { text: string }) {
   return (
-    <div className="flex items-center gap-4">
-      <span style={{ color: "#00FF87", fontSize: "10px", letterSpacing: "0.4em", textTransform: "uppercase" }}>{text}</span>
+    <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <span style={{ color: "#00FF87", fontSize: "10px", letterSpacing: "0.4em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{text}</span>
       <div style={{ flex: 1, height: "1px", background: "#1A1D24" }} />
     </div>
   );
@@ -79,30 +80,22 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).style.opacity = "1";
-            (entry.target as HTMLElement).style.transform = "translateY(0)";
-          }
+          if (entry.isIntersecting) entry.target.classList.add("in-view");
         });
       },
       { threshold: 0.08 }
     );
-    document.querySelectorAll(".reveal").forEach((el) => {
-      (el as HTMLElement).style.opacity = "0";
-      (el as HTMLElement).style.transform = "translateY(24px)";
-      (el as HTMLElement).style.transition = "opacity 0.6s ease, transform 0.6s ease";
-      observer.observe(el);
-    });
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <main style={{ background: "#080A0F", color: "#E8E6E1", minHeight: "100vh", fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}>
+    <main style={{ background: "#080A0F", color: "#E8E6E1", minHeight: "100vh" }}>
       {/* Grid bg */}
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, opacity: 0.025, backgroundImage: "linear-gradient(#00FF87 1px, transparent 1px), linear-gradient(90deg, #00FF87 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
       {/* ── HERO ── */}
-      <section style={{ position: "relative", zIndex: 10, minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "80px 7vw 60px" }}>
+      <section style={{ position: "relative", zIndex: 10, minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "100px 7vw 60px" }}>
         <p style={{ color: "#00FF87", fontSize: "11px", letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: "24px", animation: "fadeUp 0.6s ease both", animationDelay: "0.1s" }}>
           Available for opportunities
         </p>
@@ -114,34 +107,53 @@ export default function Home() {
           AI Engineer &amp; Full-Stack Developer. 6+ years building{" "}
           <span style={{ color: "#00FF87" }}>Agentic AI systems</span>, RAG pipelines, and LLM-powered products at enterprise scale.
         </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginTop: "40px", animation: "fadeUp 0.6s ease both", animationDelay: "0.5s" }}>
-          <a href="mailto:subham.choudhary.fullstack@gmail.com"
-            style={{ padding: "12px 24px", border: "1px solid #00FF87", color: "#00FF87", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
-            onMouseEnter={e => { (e.target as HTMLElement).style.background = "#00FF87"; (e.target as HTMLElement).style.color = "#000"; }}
-            onMouseLeave={e => { (e.target as HTMLElement).style.background = "transparent"; (e.target as HTMLElement).style.color = "#00FF87"; }}>
-            Email Me
+
+        {/* CTAs */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", marginTop: "40px", animation: "fadeUp 0.6s ease both", animationDelay: "0.5s" }}>
+          <Link href="/contact"
+            style={{ padding: "14px 28px", background: "#00FF87", color: "#000", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", fontWeight: 700, transition: "opacity 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+          >
+            Get In Touch →
+          </Link>
+          <a href="/Subham_Choudhary_Resume.pdf" download
+            style={{ padding: "14px 28px", border: "1px solid #00FF87", color: "#00FF87", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
+            onMouseEnter={e => { const el = e.currentTarget; el.style.background = "#00FF87"; el.style.color = "#000"; }}
+            onMouseLeave={e => { const el = e.currentTarget; el.style.background = "transparent"; el.style.color = "#00FF87"; }}
+          >
+            Download Resume ↓
           </a>
           <a href="tel:+918210219654"
-            style={{ padding: "12px 24px", border: "1px solid #2A2D35", color: "#8A8880", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
-            onMouseEnter={e => { (e.target as HTMLElement).style.borderColor = "#E8E6E1"; (e.target as HTMLElement).style.color = "#E8E6E1"; }}
-            onMouseLeave={e => { (e.target as HTMLElement).style.borderColor = "#2A2D35"; (e.target as HTMLElement).style.color = "#8A8880"; }}>
+            style={{ padding: "14px 28px", border: "1px solid #2A2D35", color: "#8A8880", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
+            onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = "#E8E6E1"; el.style.color = "#E8E6E1"; }}
+            onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = "#2A2D35"; el.style.color = "#8A8880"; }}
+          >
             +91 821-021-9654
           </a>
         </div>
+
         <div style={{ display: "flex", gap: "24px", marginTop: "28px", animation: "fadeUp 0.6s ease both", animationDelay: "0.6s" }}>
-          {[{ label: "LinkedIn ↗", href: "https://www.linkedin.com/in/subhamchoudhary/" }, { label: "GitHub ↗", href: "https://github.com/subham22choudhary/" }].map(l => (
-            <a key={l.label} href={l.href} style={{ fontSize: "10px", color: "#8A8880", letterSpacing: "0.3em", textTransform: "uppercase", textDecoration: "none", borderBottom: "1px solid transparent", transition: "all 0.2s" }}
-              onMouseEnter={e => { (e.target as HTMLElement).style.color = "#00FF87"; (e.target as HTMLElement).style.borderBottomColor = "#00FF87"; }}
-              onMouseLeave={e => { (e.target as HTMLElement).style.color = "#8A8880"; (e.target as HTMLElement).style.borderBottomColor = "transparent"; }}>
+          {[{ label: "LinkedIn ↗", href: "#" }, { label: "GitHub ↗", href: "#" }].map(l => (
+            <a key={l.label} href={l.href}
+              style={{ fontSize: "10px", color: "#8A8880", letterSpacing: "0.3em", textTransform: "uppercase", textDecoration: "none", borderBottom: "1px solid transparent", transition: "all 0.2s" }}
+              onMouseEnter={e => { const el = e.currentTarget; el.style.color = "#00FF87"; el.style.borderBottomColor = "#00FF87"; }}
+              onMouseLeave={e => { const el = e.currentTarget; el.style.color = "#8A8880"; el.style.borderBottomColor = "transparent"; }}
+            >
               {l.label}
             </a>
           ))}
         </div>
+
+        {/* Scroll indicator */}
+        <div style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", opacity: 0.3 }}>
+          <div style={{ width: "1px", height: "48px", background: "#E8E6E1", animation: "scrollPulse 2s ease-in-out infinite" }} />
+        </div>
       </section>
 
-      {/* ── SUMMARY ── */}
-      <section style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
-        <div style={{ maxWidth: "960px" }}>
+      {/* ── ABOUT ── */}
+      <section id="about" style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <SectionLabel text="00 — About" />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginTop: "40px" }}>
             {[
@@ -150,9 +162,11 @@ export default function Home() {
               "Proven ability to design and ship autonomous AI agents, RAG pipelines, and multi-step LLM orchestration at enterprise scale.",
               "Bridges AI capabilities and real-world product requirements — from prompt engineering to cloud deployment on AWS.",
             ].map((text, i) => (
-              <p key={i} className="reveal" style={{ fontSize: "13px", color: "#8A8880", lineHeight: 1.8, borderLeft: "2px solid #1A1D24", paddingLeft: "16px", cursor: "default" }}
+              <p key={i} className="reveal"
+                style={{ fontSize: "13px", color: "#8A8880", lineHeight: 1.9, borderLeft: "2px solid #1A1D24", paddingLeft: "16px", cursor: "default", transition: "border-color 0.2s, color 0.2s" }}
                 onMouseEnter={e => { const el = e.currentTarget; el.style.borderLeftColor = "#00FF87"; el.style.color = "#E8E6E1"; }}
-                onMouseLeave={e => { const el = e.currentTarget; el.style.borderLeftColor = "#1A1D24"; el.style.color = "#8A8880"; }}>
+                onMouseLeave={e => { const el = e.currentTarget; el.style.borderLeftColor = "#1A1D24"; el.style.color = "#8A8880"; }}
+              >
                 {text}
               </p>
             ))}
@@ -161,20 +175,20 @@ export default function Home() {
       </section>
 
       {/* ── EXPERIENCE ── */}
-      <section style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
-        <div style={{ maxWidth: "960px" }}>
+      <section id="experience" style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <SectionLabel text="01 — Experience" />
           <div style={{ marginTop: "48px", display: "flex", flexDirection: "column", gap: "56px" }}>
             {experience.map((job, i) => (
-              <div key={i} className="reveal" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "40px" }}>
+              <div key={i} className="reveal" style={{ display: "grid", gridTemplateColumns: "clamp(140px,18%,210px) 1fr", gap: "40px" }}>
                 <div style={{ paddingTop: "2px" }}>
-                  <p style={{ fontSize: "10px", color: "#00FF87", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "6px" }}>{job.period}</p>
-                  <h3 style={{ fontSize: "20px", fontWeight: 900, letterSpacing: "-0.5px" }}>{job.company}</h3>
-                  <p style={{ fontSize: "12px", color: "#8A8880", marginTop: "4px" }}>{job.role}</p>
+                  <p style={{ fontSize: "10px", color: "#00FF87", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "8px" }}>{job.period}</p>
+                  <h3 style={{ fontSize: "19px", fontWeight: 900, letterSpacing: "-0.5px" }}>{job.company}</h3>
+                  <p style={{ fontSize: "12px", color: "#8A8880", marginTop: "5px" }}>{job.role}</p>
                 </div>
-                <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "11px" }}>
                   {job.bullets.map((b, j) => (
-                    <li key={j} style={{ fontSize: "13px", color: "#8A8880", lineHeight: 1.7, display: "flex", gap: "12px" }}>
+                    <li key={j} style={{ fontSize: "13px", color: "#8A8880", lineHeight: 1.75, display: "flex", gap: "12px" }}>
                       <span style={{ color: "#00FF87", marginTop: "2px", flexShrink: 0 }}>▸</span>
                       <span>{b}</span>
                     </li>
@@ -187,14 +201,14 @@ export default function Home() {
       </section>
 
       {/* ── SKILLS ── */}
-      <section style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
-        <div style={{ maxWidth: "960px" }}>
+      <section id="skills" style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <SectionLabel text="02 — Skills" />
-          <div style={{ marginTop: "48px", display: "flex", flexDirection: "column", gap: "0" }}>
+          <div style={{ marginTop: "48px" }}>
             {skills.map((s, i) => (
               <div key={i} className="reveal" style={{ display: "grid", gridTemplateColumns: "180px 1fr", gap: "32px", alignItems: "baseline", borderBottom: "1px solid #12151C", paddingBottom: "20px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "10px", color: "#00FF87", letterSpacing: "0.3em", textTransform: "uppercase" }}>{s.label}</span>
-                <span style={{ fontSize: "13px", color: "#8A8880", lineHeight: 1.8 }}>{s.items}</span>
+                <span style={{ fontSize: "13px", color: "#8A8880", lineHeight: 1.9 }}>{s.items}</span>
               </div>
             ))}
           </div>
@@ -202,20 +216,22 @@ export default function Home() {
       </section>
 
       {/* ── PROJECT ── */}
-      <section style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
-        <div style={{ maxWidth: "960px" }}>
+      <section id="project" style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <SectionLabel text="03 — Project" />
           <div className="reveal" style={{ marginTop: "48px", border: "1px solid #1A1D24", padding: "40px", transition: "border-color 0.3s" }}
             onMouseEnter={e => (e.currentTarget.style.borderColor = "#00FF87")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "#1A1D24")}>
+            onMouseLeave={e => (e.currentTarget.style.borderColor = "#1A1D24")}
+          >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px", marginBottom: "24px" }}>
               <div>
                 <h3 style={{ fontSize: "26px", fontWeight: 900, letterSpacing: "-0.5px" }}>Procon</h3>
                 <p style={{ fontSize: "13px", color: "#8A8880", marginTop: "4px" }}>Full-Stack Professional Ordering Platform</p>
               </div>
-              <a href="https://procon.inteliglo.com/" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A8880", border: "1px solid #2A2D35", padding: "8px 16px", textDecoration: "none", transition: "all 0.2s" }}
-                onMouseEnter={e => { (e.target as HTMLElement).style.borderColor = "#00FF87"; (e.target as HTMLElement).style.color = "#00FF87"; }}
-                onMouseLeave={e => { (e.target as HTMLElement).style.borderColor = "#2A2D35"; (e.target as HTMLElement).style.color = "#8A8880"; }}>
+              <a href="#" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A8880", border: "1px solid #2A2D35", padding: "8px 16px", textDecoration: "none", transition: "all 0.2s" }}
+                onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = "#00FF87"; el.style.color = "#00FF87"; }}
+                onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = "#2A2D35"; el.style.color = "#8A8880"; }}
+              >
                 View ↗
               </a>
             </div>
@@ -224,7 +240,7 @@ export default function Home() {
                 <span key={t} style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", padding: "4px 12px", background: "#0D1017", border: "1px solid #1A1D24", color: "#8A8880" }}>{t}</span>
               ))}
             </div>
-            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
               {[
                 "End-to-end book ordering platform with JWT and Google Auth, seamless Stripe payment integration",
                 "Scalable relational backend in Supabase (PostgreSQL) with Row Level Security and real-time subscriptions",
@@ -241,14 +257,16 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATION ── */}
-      <section style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
-        <div style={{ maxWidth: "960px" }}>
+      <section id="education" style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <SectionLabel text="04 — Education" />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "20px", marginTop: "48px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px", marginTop: "48px" }}>
             {education.map((e, i) => (
-              <div key={i} className="reveal" style={{ border: "1px solid #1A1D24", padding: "28px", transition: "border-color 0.3s", cursor: "default" }}
+              <div key={i} className="reveal"
+                style={{ border: "1px solid #1A1D24", padding: "28px", transition: "border-color 0.3s", cursor: "default" }}
                 onMouseEnter={e2 => (e2.currentTarget.style.borderColor = "#00FF87")}
-                onMouseLeave={e2 => (e2.currentTarget.style.borderColor = "#1A1D24")}>
+                onMouseLeave={e2 => (e2.currentTarget.style.borderColor = "#1A1D24")}
+              >
                 <p style={{ fontSize: "10px", color: "#00FF87", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "8px" }}>{e.period}</p>
                 <p style={{ fontWeight: 900, fontSize: "18px", letterSpacing: "-0.5px" }}>{e.degree}</p>
                 <p style={{ fontSize: "12px", color: "#8A8880", marginTop: "6px" }}>{e.school}</p>
@@ -259,26 +277,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer style={{ position: "relative", zIndex: 10, padding: "48px 7vw", borderTop: "1px solid #12151C", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
-        <div>
-          <p style={{ fontWeight: 900, fontSize: "18px", letterSpacing: "-0.5px" }}>SUBHAM CHOUDHARY</p>
-          <p style={{ fontSize: "10px", color: "#4A4D55", marginTop: "4px", letterSpacing: "0.3em", textTransform: "uppercase" }}>AI Engineer &amp; Full-Stack Developer</p>
+      {/* ── CONTACT CTA STRIP ── */}
+      <section style={{ position: "relative", zIndex: 10, padding: "80px 7vw", borderTop: "1px solid #12151C", background: "rgba(0,255,135,0.02)" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "20px" }}>
+          <p style={{ fontSize: "10px", color: "#00FF87", letterSpacing: "0.4em", textTransform: "uppercase" }}>Let's work together</p>
+          <h2 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-1px", lineHeight: 1.1 }}>
+            Have a project in mind?
+          </h2>
+          <p style={{ fontSize: "14px", color: "#8A8880", maxWidth: "460px", lineHeight: 1.8 }}>
+            Whether it's building intelligent AI systems or shipping world-class web products — let's connect.
+          </p>
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center", marginTop: "8px" }}>
+            <Link href="/contact"
+              style={{ padding: "14px 32px", background: "#00FF87", color: "#000", fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", textDecoration: "none", fontWeight: 700, transition: "opacity 0.2s" }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+            >
+              Contact Me →
+            </Link>
+            <a href="/Subham_Choudhary_Resume.pdf" download
+              style={{ padding: "14px 32px", border: "1px solid #2A2D35", color: "#8A8880", fontSize: "11px", letterSpacing: "0.25em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
+              onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = "#00FF87"; el.style.color = "#00FF87"; }}
+              onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = "#2A2D35"; el.style.color = "#8A8880"; }}
+            >
+              View Resume ↓
+            </a>
+          </div>
         </div>
-        <a href="mailto:subham.choudhary.fullstack@gmail.com" style={{ fontSize: "13px", color: "#00FF87", textDecoration: "none" }}>
-          subham.choudhary.fullstack@gmail.com
-        </a>
-      </footer>
+      </section>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;900&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes scrollPulse {
+          0%, 100% { opacity: 0.3; transform: scaleY(1); }
+          50% { opacity: 0.8; transform: scaleY(1.2); }
         }
         @media (max-width: 640px) {
-          .grid-exp { grid-template-columns: 1fr !important; }
+          section > div > div[style*="grid-template-columns: clamp"] {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </main>
