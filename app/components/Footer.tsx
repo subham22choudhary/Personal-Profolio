@@ -85,7 +85,7 @@ export default function Footer() {
                 >
                   subham.choudhary.fullstack<br />@gmail.com
                 </a>
-                <a href="tel:+918210219654"
+                <a href="https://wa.me/918210219654"
                   style={{ display: "block", fontSize: "12px", color: "#8A8880", textDecoration: "none", marginBottom: "10px", transition: "color 0.2s" }}
                   onMouseEnter={e => (e.currentTarget.style.color = "#00FF87")}
                   onMouseLeave={e => (e.currentTarget.style.color = "#8A8880")}

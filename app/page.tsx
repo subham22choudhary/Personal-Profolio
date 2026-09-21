@@ -124,7 +124,7 @@ export default function Home() {
           >
             Download Resume ↓
           </a>
-          <a href="tel:+918210219654"
+          <a href="https://wa.me/918210219654"
             style={{ padding: "14px 28px", border: "1px solid #2A2D35", color: "#8A8880", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
             onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = "#E8E6E1"; el.style.color = "#E8E6E1"; }}
             onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = "#2A2D35"; el.style.color = "#8A8880"; }}
