@@ -134,7 +134,7 @@ export default function Home() {
         </div>
 
         <div style={{ display: "flex", gap: "24px", marginTop: "28px", animation: "fadeUp 0.6s ease both", animationDelay: "0.6s" }}>
-          {[{ label: "LinkedIn ↗", href: "#" }, { label: "GitHub ↗", href: "#" }].map(l => (
+          {[{ label: "LinkedIn ↗", href: "https://www.linkedin.com/in/subhamchoudhary" }, { label: "GitHub ↗", href: "https://github.com/subham22choudhary" }].map(l => (
             <a key={l.label} href={l.href}
               style={{ fontSize: "10px", color: "#8A8880", letterSpacing: "0.3em", textTransform: "uppercase", textDecoration: "none", borderBottom: "1px solid transparent", transition: "all 0.2s" }}
               onMouseEnter={e => { const el = e.currentTarget; el.style.color = "#00FF87"; el.style.borderBottomColor = "#00FF87"; }}
