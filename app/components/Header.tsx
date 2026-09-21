@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "About", id: "about" },
@@ -14,6 +14,7 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => {
@@ -28,14 +29,34 @@ export default function Header() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+    // If already on homepage, scroll directly
+    if (pathname === "/") {
+      const element = document.getElementById(id);
 
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      return;
     }
+
+    // If on another page, go to homepage first
+    router.push("/");
+
+    // Wait for homepage to render, then scroll
+    setTimeout(() => {
+      const element = document.getElementById(id);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 300);
   };
 
   return (
@@ -48,7 +69,9 @@ export default function Header() {
         right: 0,
         zIndex: 100,
         transition: "all 0.3s ease",
-        background: scrolled ? "rgba(0, 0, 0, 0.75)" : "transparent",
+        background: scrolled
+          ? "rgba(8, 10, 15, 0.85)"
+          : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
       }}
@@ -65,7 +88,12 @@ export default function Header() {
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none" }}>
+        <Link
+          href="/"
+          style={{
+            textDecoration: "none",
+          }}
+        >
           <span
             style={{
               fontWeight: 900,
@@ -80,6 +108,7 @@ export default function Header() {
             SC
 
             <span
+              className="dot-pulse"
               style={{
                 width: "6px",
                 height: "6px",
@@ -87,7 +116,6 @@ export default function Header() {
                 background: "#00FF87",
                 display: "inline-block",
               }}
-              className="dot-pulse"
             />
           </span>
         </Link>
@@ -101,7 +129,7 @@ export default function Header() {
             alignItems: "center",
           }}
         >
-          {/* Section Links */}
+          {/* About / Experience / Skills / Project */}
           {navLinks.map((link) => (
             <button
               key={link.label}
@@ -115,6 +143,7 @@ export default function Header() {
                 color: "#8A8880",
                 background: "transparent",
                 border: "none",
+                borderBottom: "1px solid transparent",
                 padding: "0 0 2px",
                 cursor: "pointer",
                 fontFamily: "inherit",
@@ -144,7 +173,10 @@ export default function Header() {
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               textDecoration: "none",
-              color: pathname === "/contact" ? "#00FF87" : "#8A8880",
+              color:
+                pathname === "/contact"
+                  ? "#00FF87"
+                  : "#8A8880",
               borderBottom:
                 pathname === "/contact"
                   ? "1px solid #00FF87"
