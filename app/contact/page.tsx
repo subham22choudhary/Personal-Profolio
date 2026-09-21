@@ -110,7 +110,7 @@ export default function ContactPage() {
                 { label: "Email", value: "subham.choudhary.fullstack@gmail.com", href: "mailto:subham.choudhary.fullstack@gmail.com" },
                 { label: "Phone", value: "+91 821-021-9654", href: "tel:+918210219654" },
                 { label: "LinkedIn", value: "linkedin.com/in/subham", href: "https://www.linkedin.com/in/subhamchoudhary/" },
-                { label: "GitHub", value: "github.com/subham", href: "https://github.com/subham22choudhary" },
+                { label: "GitHub", value: "github.com/subham", href: "https://github.com/subham22choudhary?tab=repositories" },
               ].map((item) => (
                 <div key={item.label}>
                   <p style={{ fontSize: "10px", color: "#00FF87", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "4px" }}>{item.label}</p>

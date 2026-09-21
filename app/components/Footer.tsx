@@ -116,13 +116,27 @@ export default function Footer() {
               © {new Date().getFullYear()} Subham Choudhary. All rights reserved.
             </p>
             <div style={{ display: "flex", gap: "20px" }}>
-              {["LinkedIn ↗", "GitHub ↗"].map(l => (
-                <a key={l} href="#"
-                  style={{ fontSize: "10px", color: "#3A3D45", textDecoration: "none", letterSpacing: "0.2em", textTransform: "uppercase", transition: "color 0.2s" }}
+              {[
+                { label: "LinkedIn ↗", href: "https://linkedin.com/in/subhamchoudhary" },
+                { label: "GitHub ↗", href: "https://github.com/subham22choudhary?tab=repositories" },
+              ].map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: "10px",
+                    color: "#3A3D45",
+                    textDecoration: "none",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    transition: "color 0.2s",
+                  }}
                   onMouseEnter={e => (e.currentTarget.style.color = "#00FF87")}
                   onMouseLeave={e => (e.currentTarget.style.color = "#3A3D45")}
                 >
-                  {l}
+                  {label}
                 </a>
               ))}
             </div>
