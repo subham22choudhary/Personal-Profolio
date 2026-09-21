@@ -228,7 +228,7 @@ export default function Home() {
                 <h3 style={{ fontSize: "26px", fontWeight: 900, letterSpacing: "-0.5px" }}>Procon</h3>
                 <p style={{ fontSize: "13px", color: "#8A8880", marginTop: "4px" }}>Full-Stack Professional Ordering Platform</p>
               </div>
-              <a href="#" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A8880", border: "1px solid #2A2D35", padding: "8px 16px", textDecoration: "none", transition: "all 0.2s" }}
+              <a href="https://procon.inteliglo.com/" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A8880", border: "1px solid #2A2D35", padding: "8px 16px", textDecoration: "none", transition: "all 0.2s" }}
                 onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = "#00FF87"; el.style.color = "#00FF87"; }}
                 onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = "#2A2D35"; el.style.color = "#8A8880"; }}
               >
